@@ -5,8 +5,15 @@ set_target_properties(CMatrix
     ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
 )
 
+add_library(helper helper.cpp)
+set_target_properties(CMatrix
+    PROPERTIES
+    CXX_STANDARD 17
+    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+)
+
 add_executable(NS_Solver main.cpp)
-target_link_libraries(NS_Solver PUBLIC CMatrix)
+target_link_libraries(NS_Solver PUBLIC ${MPI_LIBRARIES} CMatrix helper)
 
 set_target_properties(NS_Solver
     PROPERTIES
